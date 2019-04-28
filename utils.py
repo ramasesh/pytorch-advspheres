@@ -6,14 +6,19 @@ import numpy as np
 
 def eval_accuracy(network, n_pts):
     d_set = dataset.sphere_dataset()
+    eval_loader = torch.utils.data.dataloader.DataLoader(d_set, 
+                                                         batch_size=n_pts)
+    test_pts, labels = next(iter(eval_loader))
+    with torch.no_grad():
+        outputs = network(test_pts)
 
-    correct = 0
-    for i in range(n_pts):
-        output = network(d_set[i][0])
-        if output > 0.0 and d_set[i][1] == 1:
-            correct += 1
-        elif output <= 0.0 and d_set[i][1] == 0:
-            correct += 1
+    # the prediction is correct if sign(output) == sign(labels-0.5)
+    # the below code is just a convoluted way of calculating 
+    # the number of correct predictions
+    # TODO make this more readable
+    
+    correct = torch.sum(((outputs.sign().view(1,-1) * (labels.float() - 0.5).sign()) + 1.)/2.).item()
+ 
     return correct/n_pts
 
 def histogram_outputs(network, n_pts):
