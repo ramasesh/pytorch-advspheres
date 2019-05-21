@@ -1,0 +1,6 @@
+{trained_models/batch_0/largeReLU_1_10.pth: 0.0, trained_models/batch_0/largeReLU_1_1000.pth: 0.999958,
+  trained_models/batch_0/largeReLU_1_20.pth: 0.859758, trained_models/batch_0/largeReLU_1_2000.pth: 0.99696,
+  trained_models/batch_0/largeReLU_1_3000.pth: 0.995658, trained_models/batch_0/largeReLU_1_500.pth: 0.996406,
+  trained_models/batch_0/largeReLU_2_10.pth: 0.0, trained_models/batch_0/largeReLU_2_1000.pth: 0.999297,
+  trained_models/batch_0/largeReLU_2_20.pth: 1.0e-06, trained_models/batch_0/largeReLU_2_2000.pth: 0.999993,
+  trained_models/batch_0/largeReLU_2_3000.pth: 0.999999, trained_models/batch_0/largeReLU_2_500.pth: 1.0}
