@@ -7,7 +7,7 @@ import utils
 import glob
 import yaml
 
-log_file = 'log_file.yaml'
+log_file = 'log_file_{}.yaml'
 
 network_types = ['large', 'small']
 network_params = {'large': {'sphere_dim': 500, 'n_hidden': 2000},
@@ -17,11 +17,11 @@ evaluation_params = {'n_pts': int(1e6), 'radius': 1, 'desired_label': 0}
 
 accuracies = {}
 
-folder_names = ['batch_0', 'batch_1', 'batch_2']
+folder_names = ['batch_2']
 
 for folder in folder_names:
     for network_type in network_types:
-        files_to_run = glob.glob('{}/*{}*.pth'.format(folder,network_type))
+        files_to_run = glob.glob('trained_models/{}/*{}*.pth'.format(folder,network_type))
         
         print(files_to_run)
 
@@ -39,5 +39,5 @@ for folder in folder_names:
         
             accuracies[filename] = accuracy
 
-    with open(log_file, 'w') as f:
+    with open(log_file.format(folder), 'w') as f:
         yaml.dump(accuracies, f)
