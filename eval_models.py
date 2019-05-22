@@ -17,7 +17,7 @@ evaluation_params = {'n_pts': int(1e6), 'radius': 1, 'desired_label': 0}
 
 accuracies = {}
 
-folder_names = ['batch_1_small']
+folder_names = ['batch_1']
 
 for folder in folder_names:
     for network_type in network_types:
