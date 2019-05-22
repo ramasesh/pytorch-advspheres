@@ -11,6 +11,9 @@ def eval_accuracy(network, n_pts):
     eval_loader = torch.utils.data.dataloader.DataLoader(d_set, 
                                                          batch_size=n_pts)
     test_pts, labels = next(iter(eval_loader))
+    if torch.cuda.is_available():
+        test_pts = test_pts.to(torch.device('cuda'))
+
     with torch.no_grad():
         outputs = network(test_pts)
 

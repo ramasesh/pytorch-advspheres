@@ -29,11 +29,17 @@ for folder in folder_names:
             test_net = model.LargeReLU(**network_params['large'])
         elif network_type == 'small':
             test_net = model.SmallReLU(**network_params['small'])
-        
+       
         for filename in files_to_run:
 
-            loaded_params = torch.load(filename)
-            test_net.load_state_dict(loaded_params['model_state_dict'])
+            if torch.cuda.is_available():
+                device = torch.device("cuda")
+                loaded_params = torch.load(filename, map_location="cuda:0")
+                test_net.load_state_dict(loaded_params['model_state_dict'])
+                test_net.to(device)
+            else:
+                loaded_params = torch.load(filename)
+                test_net.load_state_dict(loaded_params['model_state_dict'])
             
             accuracy = utils.eval_accuracy_single(test_net, **evaluation_params)
         
